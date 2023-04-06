@@ -1,3 +1,5 @@
+Dupla: Rafaella Medeiros Trexler Mourão e Lucas dos Santos Silva
+
 # API do Clima
 Base URL: [http://api.weatherapi.com/v1](https://www.weatherapi.com/docs/#)
 <br>
