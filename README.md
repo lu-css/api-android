@@ -669,7 +669,7 @@ Em caso de erro, este objeto é retornado
 |  type |  String | O tipo da mensagem. Pode ser "warning" para avisos ou "error" para erros |
 |  text |  String |                         O corpo da mensagem.                         |
 
-### ### Endpoints disponíveis
+### Endpoints disponíveis
 
 **GET** /advice
 
@@ -988,7 +988,7 @@ Os Endpoints desta sessão não precisam de nenhuma forma de autenticação.
 
 #### Get preço da margem
 
-Request via this endpoint to get the index price of the specified symbol.
+Este endpoint retorna o preço de índice do símbolo especificado.
 
 **GET** /api/v1/mark-price/{symbol}/current
 
@@ -1015,9 +1015,10 @@ curl "https://api.kucoin.com/api/v1/mark-price/USDT-BTC/current"
 ```
 
 
-#### Get Margin Configuration Info
 
-Request via this endpoint to get the configure info of the margin.
+# Get Margin Configuration Info
+
+Este endpoint retorna informações sobre a configuração da margem.
 
 **GET** /api/v1/margin/config
 
