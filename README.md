@@ -765,7 +765,7 @@ Esses Endpoints não precisam de nenhum método de autenticação.
 
 #### Get Lista de Mercado
 
-Request via this endpoint to get the transaction currency for the entire trading market.
+Este Endpoint retorna todas as moedas para o mercado inteiro.
 
 **GET** /api/v1/markets
 
@@ -867,7 +867,8 @@ curl "https://api.kucoin.com/api/v2/symbols?market=BTC"
 
 #### Get Ticker
 
-Request via this endpoint to get Level 1 Market Data. The returned value includes the best bid price and size, the best ask price and size as well as the last traded price and the last traded size.
+Solicite através deste endpoint para obter Dados de Mercado de Nível 1. O valor retornado inclui o melhor preço e tamanho de lance, o melhor preço e tamanho de venda, bem como o último preço negociado e o último tamanho negociado.
+
 
 **GET** /api/v1/market/orderbook/level1
 
@@ -902,7 +903,7 @@ curl "https://api.kucoin.com/api/v1/market/orderbook/level1?symbol=BTC-USDT"
 
 #### Get All Tickers
 
-Este Endpoint fornece informações sobre o melhor preço e tamanho de oferta, melhor preço e tamanho de compra, e também sobre o último preço e tamanho negociado.
+Solicite tickers de mercado para todos os pares de negociação no mercado (incluindo volume de 24h).
 
 **GET** /api/v1/market/allTickers
 
