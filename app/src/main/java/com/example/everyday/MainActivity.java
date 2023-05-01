@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<MainPageModel> {
 
   private TextView adviceSentence;
 
@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d("opa", "Main Activity - Runned");
+        
 
         adviceSentence = findViewById(R.id.adviceSentence);
 
@@ -35,20 +36,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
 
       Bundle queryBundle = new Bundle();
+      queryBundle.putString("coin_from", "BRL");
+      queryBundle.putString("coin_to", "USD");
+
       getSupportLoaderManager().restartLoader(0, queryBundle, this);
     }
 
    @NonNull
     @Override
-    public Loader<String> onCreateLoader(int id, @Nullable Bundle args) {
-        return new AdviceUtils(this);
+    public Loader<MainPageModel> onCreateLoader(int id, @Nullable Bundle args) {
+      Bundle queryBundle = new Bundle();
+      queryBundle.putString("coin_from", "BRL");
+      queryBundle.putString("coin_to", "USD");
+
+        return new MainPageTaskLoader(this, queryBundle);
     }
     @Override
-    public void onLoadFinished(@NonNull Loader<String> loader, String data) {
-        adviceSentence.setText(data);
+    public void onLoadFinished(@NonNull Loader<MainPageModel> loader, MainPageModel data) {
+        adviceSentence.setText(data.getRandomAdvice());
     }
     @Override
-    public void onLoaderReset(@NonNull Loader<String> loader) {
+    public void onLoaderReset(@NonNull Loader<MainPageModel> loader) {
         // obrigatório implementar, nenhuma ação executada
     }
 }
