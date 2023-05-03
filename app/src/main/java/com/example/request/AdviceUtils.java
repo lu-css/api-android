@@ -10,7 +10,7 @@ public class AdviceUtils{
      * <p> This method extracts sentence from a randon Slip. </p>
      *
      * @param slipJson Slip JSON object.
-     * @return a randonly Adivice text.
+     * @return a randomly Adivice text.
      */
     public static String extractAdvice(JSONObject spitJson) throws Exception {
         return spitJson.getJSONObject("slip").getString("advice");
@@ -21,13 +21,8 @@ public class AdviceUtils{
      *
      * @return A randonly Adivice text.
      */
-
-    public static String getRandomAdvice() {
-        try {
-            return extractAdvice(makeRandomAdviceRequest());
-        } catch (Exception e) {
-            return e.getMessage();
-        }
+    public static String getRandomAdvice() throws Exception{
+        return extractAdvice(makeRandomAdviceRequest());
     }
 
     private static JSONObject makeRandomAdviceRequest() throws Exception {

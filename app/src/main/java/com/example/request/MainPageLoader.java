@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
+import com.example.request.models.WeatherModel;
+
 public class MainPageLoader extends AsyncTaskLoader<MainPageModel>{
     private Bundle query;
 
@@ -23,8 +25,13 @@ public class MainPageLoader extends AsyncTaskLoader<MainPageModel>{
     @Override
     @Nullable
     public MainPageModel loadInBackground(){
-        String advice = AdviceUtils.getRandomAdvice();
+      try {
+          String advice = AdviceUtils.getRandomAdvice();
+          WeatherModel weather = WeatherUtils.getCurrentWhether();
 
-        return new MainPageModel(advice);
+          return new MainPageModel(advice, weather);
+      } catch (Exception e) {
+        return new MainPageModel(e.getMessage());
+      }
     }
 }

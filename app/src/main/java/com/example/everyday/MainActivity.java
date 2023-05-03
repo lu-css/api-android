@@ -37,7 +37,12 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(@NonNull Loader<MainPageModel> loader, MainPageModel data) {
-        adviceSentence.setText(data.getRandomAdvice());
+      if (data.hasError()) {
+        adviceSentence.setText("ERROR: " + data.getError());
+        return;
+      }
+
+      adviceSentence.setText(String.valueOf(data.getWeather().getTemp()));
     }
 
     @Override

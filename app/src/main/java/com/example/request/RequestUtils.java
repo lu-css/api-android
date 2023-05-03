@@ -32,6 +32,18 @@ public class RequestUtils {
         return response;
     }
 
+    public static JSONObject get(URL url) throws IOException, Exception  {
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+        urlConnection.connect();
+
+        JSONObject response = buildresponse(urlConnection);
+
+        urlConnection.disconnect();
+
+        return response;
+    }
+
     /**
      * <p> Vuilds the URL with all queries params </p>
      * <p>Returns a `InvalidQueryParams` if the params are incorrect. The params must contain a pair. </p>
@@ -40,20 +52,6 @@ public class RequestUtils {
      */
     public static URL buildURL(String url, String... params) throws MalformedURLException, InvalidQueryParams, InvalidQueryParams {
         Uri uri = Uri.parse(url);
-
-        int paramsLenght = params.length;
-
-        if (paramsLenght % 2 != 0) {
-            throw new InvalidQueryParams(paramsLenght);
-        }
-
-        for(int i = 0; i < paramsLenght; i++) {
-            if (i + 1 >= paramsLenght) {
-                break;
-            }
-
-            uri.buildUpon().appendQueryParameter(params[i], params[i + 1]);
-        }
 
         return new URL(uri.toString());
     }
