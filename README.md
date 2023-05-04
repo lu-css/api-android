@@ -2,6 +2,14 @@ Dupla: Rafaella Medeiros Trexler Mourão e Lucas dos Santos Silva
 
 [Design](https://design.penpot.app/#/view/eed6a2fa-084f-808f-8002-58b5f5d6a4c6?page-id=eed6a2fa-084f-808f-8002-58b5f5d6a4c7&section=interactions&index=0&share-id=5d8c4d0a-1e64-8116-8002-74622cab1a29)
 
+# Descrição do App
+
+O nosso aplicativo tem apenas uma tela, mas oferece muitas informações úteis para o usuário. O objetivo é fornecer um painel de controle fácil de entender, com informações importantes para o dia a dia.
+
+Para começar, exibimos as condições climáticas em tempo real, com base na localização do usuário. Isso é possível graças à API "Weather api", juntamente com a API "FreeIP api", que identifica o endereço IP do dispositivo e o usa para determinar a localização do usuário.
+
+Em seguida, apresentamos uma frase inspiradora do dia, obtida através da API "Advice Slip". Logo abaixo, exibimos as taxas de câmbio de várias moedas, usando a API "Kucoin", e é possível pesquisar por uma moeda específica para facilitar a busca.
+
 # API do Clima
 Base URL: [http://api.weatherapi.com/v1](https://www.weatherapi.com/docs/#)
 <br>
