@@ -4,11 +4,15 @@ Dupla: Rafaella Medeiros Trexler Mourão e Lucas dos Santos Silva
 
 # Descrição do App
 
-O nosso aplicativo tem apenas uma tela, mas oferece muitas informações úteis para o usuário. O objetivo é fornecer um painel de controle fácil de entender, com informações importantes para o dia a dia.
+O nosso aplicativo de "Boas vindas informativo" foi desenvolvido para fornecer informações importantes para o dia a dia do usuário de maneira fácil e conveniente. Com apenas uma tela, o usuário pode ter acesso a diversas informações úteis.
 
-Para começar, exibimos as condições climáticas em tempo real, com base na localização do usuário. Isso é possível graças à API "Weather api", juntamente com a API "FreeIP api", que identifica o endereço IP do dispositivo e o usa para determinar a localização do usuário.
+Começamos exibindo as condições climáticas em tempo real, com base na localização do usuário. Isso é possível graças à API "Weather api" e à API "FreeIP api", que trabalham juntas para identificar a localização do usuário com base no endereço IP do dispositivo. Com esta informação, podemos fornecer dados precisos sobre a temperatura, previsão do tempo, umidade e outras informações relacionadas ao clima em sua região.
 
-Em seguida, apresentamos uma frase inspiradora do dia, obtida através da API "Advice Slip". Logo abaixo, exibimos as taxas de câmbio de várias moedas, usando a API "Kucoin", e é possível pesquisar por uma moeda específica para facilitar a busca.
+Além disso, o aplicativo apresenta uma frase inspiradora do dia, selecionada aleatoriamente da API "Advice Slip". Essas mensagens inspiradoras podem ajudar o usuário a começar o dia com uma mentalidade positiva e motivadora.
+
+Logo abaixo, exibimos as taxas de câmbio de várias moedas. Com esta funcionalidade, o usuário pode pesquisar uma moeda específica e obter informações atualizadas sobre sua cotação. Isso pode ser útil para quem trabalha com câmbio ou precisa fazer viagens internacionais, por exemplo.
+
+Nosso objetivo é fornecer informações úteis e relevantes para o usuário em apenas uma tela, de forma clara e fácil de entender. Dessa forma, esperamos facilitar a vida do usuário e tornar seu dia a dia mais produtivo e agradável.
 
 # API do Clima
 Base URL: [http://api.weatherapi.com/v1](https://www.weatherapi.com/docs/#)
