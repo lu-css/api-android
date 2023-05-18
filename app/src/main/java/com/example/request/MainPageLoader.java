@@ -28,8 +28,9 @@ public class MainPageLoader extends AsyncTaskLoader<MainPageModel>{
       try {
           String advice = AdviceUtils.getRandomAdvice();
           WeatherModel weather = WeatherUtils.getCurrentWhether();
+          double currency = FreeCurrencyUtils.convertedAmmount("USD", "BRL");
 
-          return new MainPageModel(advice, weather);
+          return new MainPageModel(advice, weather, currency);
       } catch (Exception e) {
         return new MainPageModel(e.getMessage());
       }

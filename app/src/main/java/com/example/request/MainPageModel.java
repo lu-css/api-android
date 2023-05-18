@@ -6,17 +6,21 @@ public class MainPageModel{
     private final String randomAdvice;
     private final WeatherModel weather;
 
+    private final double currency;
+
     private final String error;
 
     public MainPageModel(String error) {
-      this.randomAdvice = "";
-      this.weather = new WeatherModel();
-      this.error = error;
+        this.randomAdvice = "";
+        this.currency= 0;
+        this.weather = new WeatherModel();
+        this.error = error;
     }
 
-    public MainPageModel(String randomAdvice, WeatherModel weather){
+    public MainPageModel(String randomAdvice, WeatherModel weather, double currency){
         this.randomAdvice = randomAdvice;
         this.weather = weather;
+        this.currency = currency;
 
         this.error = null;
     }
@@ -36,5 +40,7 @@ public class MainPageModel{
     public boolean hasError() {
       return error != null;
     }
+
+    public double getCurrencyTo(){ return currency; }
 
 }
