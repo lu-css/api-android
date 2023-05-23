@@ -2,7 +2,6 @@ Dupla: Rafaella Medeiros Trexler Mourão e Lucas dos Santos Silva
 
 [Design](https://design.penpot.app/#/view/eed6a2fa-084f-808f-8002-58b5f5d6a4c6?page-id=eed6a2fa-084f-808f-8002-58b5f5d6a4c7&section=interactions&index=0&share-id=5d8c4d0a-1e64-8116-8002-74622cab1a29)
 
-# Descrição do App
 
 # Diagrama de Classes
 
@@ -11,6 +10,8 @@ Dupla: Rafaella Medeiros Trexler Mourão e Lucas dos Santos Silva
 # DER
 
 <img src="DER.png" height="250px">
+
+# Descrição do App
 
 O nosso aplicativo de "Boas vindas informativo" foi desenvolvido para fornecer informações importantes para o dia a dia do usuário de maneira fácil e conveniente. Com apenas uma tela, o usuário pode ter acesso a diversas informações úteis.
 
