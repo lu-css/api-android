@@ -1,6 +1,8 @@
 package com.example.everyday;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +16,7 @@ import com.example.request.*;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<MainPageModel> {
 
   private TextView adviceSentence;
+  private TextView currencySentense;
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
 
         adviceSentence = findViewById(R.id.adviceSentence);
+        currencySentense = findViewById(R.id.currency);
 
        if (getSupportLoaderManager().getLoader(0) != null) {
             getSupportLoaderManager().initLoader(0, null, this);
@@ -42,9 +46,26 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         return;
       }
 
-      adviceSentence.setText(String.valueOf(data.getWeather().getTemp()));
+        // adviceSentence.setText(String.valueOf(data.getWeather().getTemp()));
+      adviceSentence.setText(String.valueOf(data.getRandomAdvice()));
+      currencySentense.setText(String.valueOf(data.getCurrencyTo()));
+
     }
 
     @Override
     public void onLoaderReset(@NonNull Loader<MainPageModel> loader) { /* Not implmented */ }
+
+    public void convertMoney(View v){
+        Log.i("MORTE", "API DO DINHERO");
+        Log.d("MORTE", "API DO DINHERO");
+
+        Bundle query = new Bundle();
+
+        query.putString("API", FreeCurrencyUtils.API_ID);
+        query.putString("MONEY_FROM", "EUR");
+        query.putString("MONEY_TO", "BRL");
+
+
+        getSupportLoaderManager().restartLoader(0, query, this);
+    }
 }
