@@ -2,14 +2,12 @@ package com.example.request;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
 import com.example.request.models.WeatherModel;
-
-import java.util.Currency;
-import java.util.concurrent.ExecutionException;
 
 public class MainPageLoader extends AsyncTaskLoader<MainPageModel>{
     private Bundle query;
@@ -28,35 +26,23 @@ public class MainPageLoader extends AsyncTaskLoader<MainPageModel>{
     @Override
     @Nullable
     public MainPageModel loadInBackground(){
+        String money_from = query.getString("MONEY_FROM");
+        String money_to = query.getString("MONEY_TO");
 
-        if(query.getString("API") != null){
-            try{
-                switch (query.getString("API")) {
-                    case(FreeCurrencyUtils.API_ID):
-                        return currencyAPI("USD", "BRL");
-                }
+        Log.d("API_MONEY", money_from);
+        Log.d("API_MONEY", money_to);
 
-            } catch (Exception e) {
-                return new MainPageModel(e.getMessage());
-            }
-        }
-
-        try {
-            String advice = AdviceUtils.getRandomAdvice();
+      try {
+          String advice = AdviceUtils.getRandomAdvice();
           WeatherModel weather = WeatherUtils.getCurrentWhether();
-          double currency = FreeCurrencyUtils.convertedAmmount("USD", "BRL");
+          double currency = FreeCurrencyUtils.convertedAmmount(
+                  money_from,
+                  money_to
+          );
 
           return new MainPageModel(advice, weather, currency);
       } catch (Exception e) {
         return new MainPageModel(e.getMessage());
       }
-    }
-
-    private static MainPageModel currencyAPI(String from, String to) throws Exception {
-        double currency = FreeCurrencyUtils.convertedAmmount(from, to);
-        MainPageModel page = new MainPageModel(null, null, currency);
-
-        page.usingAPI = FreeCurrencyUtils.API_ID;
-        return page;
     }
 }
