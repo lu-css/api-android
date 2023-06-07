@@ -8,6 +8,7 @@ public class MainPageModel{
 
     private final double currency;
 
+    public String usingAPI = null;
     private final String error;
 
     public MainPageModel(String error) {
