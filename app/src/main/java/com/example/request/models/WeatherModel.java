@@ -27,4 +27,11 @@ public class WeatherModel {
     public double getTemp() { return temp; }
 
     public Localization getLocalization() { return localization; }
+
+    @Override
+    public String toString(){
+        String r = String.format("%s, %.0f ºC em %s", condition, temp, localization.city);
+        return r;
+    }
+
 }

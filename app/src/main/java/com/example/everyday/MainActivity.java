@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
   private EditText txtConvertFrom;
   private EditText txtConvertTo;
 
+  private TextView climateSentence;
+
   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         adviceSentence = findViewById(R.id.adviceSentence);
         currencySentense = findViewById(R.id.currency);
+
+        climateSentence = findViewById(R.id.climate);
 
         txtConvertFrom = findViewById(R.id.convert_from);
         txtConvertTo = findViewById(R.id.convert_to);
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // adviceSentence.setText(String.valueOf(data.getWeather().getTemp()));
       adviceSentence.setText(String.valueOf(data.getRandomAdvice()));
       currencySentense.setText(String.valueOf(data.getCurrencyTo()));
+     climateSentence.setText(String.valueOf(data.getWeather().toString()));
 
     }
 
