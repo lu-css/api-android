@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // adviceSentence.setText(String.valueOf(data.getWeather().getTemp()));
       adviceSentence.setText(String.valueOf(data.getRandomAdvice()));
-      currencySentense.setText(String.valueOf(data.getCurrencyTo()));
+      currencySentense.setText(CurrencyChecks.decimalNumbers(data.getCurrencyTo()));
      climateSentence.setText(String.valueOf(data.getWeather().toString()));
 
     }
@@ -84,14 +84,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(@NonNull Loader<MainPageModel> loader) { /* Not implmented */ }
 
     public void convertMoney(View v){
-        Log.i("MORTE", "API DO DINHERO");
-        Log.d("MORTE", "API DO DINHERO");
-        Log.e("MORTE", "API DO DINHEIRO");
-
         Bundle query = new Bundle();
 
-        String from = txtConvertFrom.getText().toString();
-        String to = txtConvertTo.getText().toString();
+        String from = CurrencyChecks.parseCoin(txtConvertFrom.getText().toString());
+        String to = CurrencyChecks.parseCoin(txtConvertTo.getText().toString());
 
         try{
             CurrencyChecks.validCoin(from);
