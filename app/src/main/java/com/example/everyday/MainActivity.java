@@ -1,5 +1,6 @@
 package com.example.everyday;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -94,5 +95,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         db.addHistory(from, to);
 
         getSupportLoaderManager().restartLoader(0, query, this);
+    }
+
+    public void toHistoryActivity(View v){
+        Intent intent = new Intent(this, history.class);
+        startActivity(intent);
     }
 }

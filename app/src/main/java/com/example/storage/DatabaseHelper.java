@@ -2,10 +2,15 @@ package com.example.storage;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.example.models.History;
+
+import java.util.ArrayList;
 
 abstract class DB{
     public static final String TABLE_HISTORY = "tb_history";
@@ -48,5 +53,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         boolean success = db.insert(DB.TABLE_HISTORY, null, content) > 0;
 
         return success;
+    }
+
+    public History getLastHistory(){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // Searches for the last added item in history.
+        String query = String.format("SELECT * FROM %s ORDER BY %s DESC LIMIT 1", DB.TABLE_HISTORY, DB.COLUMN_HISTORY_ID);
+
+        // Runs the query.
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        // Id From Field.
+        int index = cursor.getColumnIndex(DB.COLUMN_HISTORY_ID);
+        int id = cursor.getInt(index);
+
+        // MoneyFrom Field.
+        index = cursor.getColumnIndex(DB.COLUMN_HISTORY_MONEY_FROM);
+        String money_from = cursor.getString(index);
+
+        // MoneyTo Field.
+        index = cursor.getColumnIndex(DB.COLUMN_HISTORY_MONEY_TO);
+        String money_to = cursor.getString(index);
+
+        // Builds the History object.
+        return new History(id, money_from, money_to);
+    }
+
+    public ArrayList<History> getAllHistoryItens(){
+        ArrayList<History> histories = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String query = String.format("SELECT * FROM %s ORDER BY %s DESC", DB.TABLE_HISTORY, DB.COLUMN_HISTORY_ID);
+
+        // Runs the query.
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while(!cursor.isAfterLast()){
+            int index;
+
+            index = cursor.getColumnIndex(DB.COLUMN_HISTORY_ID);
+            int id = cursor.getInt(index);
+
+            // MoneyFrom Field.
+            index = cursor.getColumnIndex(DB.COLUMN_HISTORY_MONEY_FROM);
+            String money_from = cursor.getString(index);
+
+            // MoneyTo Field.
+            index = cursor.getColumnIndex(DB.COLUMN_HISTORY_MONEY_TO);
+            String money_to = cursor.getString(index);
+
+            histories.add(new History(id, money_from, money_to));
+        }
+
+        return histories;
     }
 }
