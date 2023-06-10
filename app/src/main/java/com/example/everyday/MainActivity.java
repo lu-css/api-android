@@ -13,6 +13,7 @@ import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import com.example.request.*;
+import com.example.storage.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<MainPageModel> {
 
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
   private EditText txtConvertTo;
 
   private TextView climateSentence;
+
+  private DatabaseHelper db;
 
   @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
       query.putString("MONEY_TO", "BRL");
 
       getSupportLoaderManager().restartLoader(0, query, this);
-    }
+
+      db = new DatabaseHelper(this);
+  }
 
     @NonNull
     @Override
@@ -79,9 +84,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Bundle query = new Bundle();
 
+        String from = txtConvertFrom.getText().toString();
+        String to = txtConvertTo.getText().toString();
+
         // query.putString("API", FreeCurrencyUtils.API_ID);
-        query.putString("MONEY_FROM", txtConvertFrom.getText().toString());
-        query.putString("MONEY_TO", txtConvertTo.getText().toString());
+        query.putString("MONEY_FROM", from);
+        query.putString("MONEY_TO", to);
+
+        db.addHistory(from, to);
 
         getSupportLoaderManager().restartLoader(0, query, this);
     }
