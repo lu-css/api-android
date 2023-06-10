@@ -2,21 +2,13 @@ package com.example.request;
 
 import android.net.Uri;
 
-import com.example.request.models.WeatherModel;
-import com.example.request.models.Localization;
+import com.example.models.WeatherModel;
+import com.example.models.Localization;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 
 import org.json.JSONObject;
-
-import java.util.Optional;
 
 public class WeatherUtils {
     private static final String BASE_URL = "https://api.weatherapi.com/v1";

@@ -2,7 +2,7 @@ package com.example.request;
 
 import org.json.JSONObject;
 
-import com.example.request.models.Localization;
+import com.example.models.Localization;
 
 public class IPUtils {
     public static final String BASE_URL = "https://freeipapi.com";

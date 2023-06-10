@@ -1,4 +1,6 @@
-package com.example.request.models;
+package com.example.models;
+
+import com.example.models.Localization;
 
 public class WeatherModel {
     private String condition;

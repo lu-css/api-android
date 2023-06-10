@@ -1,20 +1,25 @@
 package com.example.everyday;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.app.LoaderManager;
+import androidx.loader.content.AsyncTaskLoader;
 import androidx.loader.content.Loader;
 
+import com.example.models.WeatherModel;
 import com.example.request.*;
 import com.example.storage.DatabaseHelper;
+import com.example.validations.CurrencyChecks;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<MainPageModel> {
 
@@ -64,8 +69,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(@NonNull Loader<MainPageModel> loader, MainPageModel data) {
       if (data.hasError()) {
-        adviceSentence.setText("ERROR: " + data.getError());
-        return;
+          Toast.makeText(this, data.getError(), Toast.LENGTH_LONG);
+          return;
       }
 
         // adviceSentence.setText(String.valueOf(data.getWeather().getTemp()));
@@ -88,6 +93,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         String from = txtConvertFrom.getText().toString();
         String to = txtConvertTo.getText().toString();
 
+        try{
+            CurrencyChecks.validCoin(from);
+            CurrencyChecks.validCoin(to);
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(),Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         // query.putString("API", FreeCurrencyUtils.API_ID);
         query.putString("MONEY_FROM", from);
         query.putString("MONEY_TO", to);
@@ -100,5 +114,88 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void toHistoryActivity(View v){
         Intent intent = new Intent(this, history.class);
         startActivity(intent);
+    }
+}
+
+class MainPageModel{
+    private final String randomAdvice;
+    private final WeatherModel weather;
+
+    private final double currency;
+
+    public String usingAPI = null;
+    private final String error;
+
+    public MainPageModel(String error) {
+        this.randomAdvice = "";
+        this.currency= 0;
+        this.weather = new WeatherModel();
+        this.error = error;
+    }
+
+    public MainPageModel(String randomAdvice, WeatherModel weather, double currency){
+        this.randomAdvice = randomAdvice;
+        this.weather = weather;
+        this.currency = currency;
+
+        this.error = null;
+    }
+
+    public String getRandomAdvice(){
+        return this.randomAdvice;
+    }
+
+    public WeatherModel getWeather(){
+        return this.weather;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public boolean hasError() {
+        return error != null;
+    }
+
+    public double getCurrencyTo(){ return currency; }
+
+}
+
+
+class MainPageLoader extends AsyncTaskLoader<MainPageModel> {
+    private Bundle query;
+
+    public MainPageLoader(Context context, Bundle query) {
+        super(context);
+        this.query = query;
+    }
+
+    @Override
+    protected void onStartLoading(){
+        super.onStartLoading();
+        forceLoad();
+    }
+
+    @Override
+    @Nullable
+    public MainPageModel loadInBackground(){
+        String money_from = query.getString("MONEY_FROM");
+        String money_to = query.getString("MONEY_TO");
+
+        Log.d("API_MONEY", money_from);
+        Log.d("API_MONEY", money_to);
+
+        try {
+            String advice = AdviceUtils.getRandomAdvice();
+            WeatherModel weather = WeatherUtils.getCurrentWhether();
+            double currency = FreeCurrencyUtils.convertedAmmount(
+                    money_from,
+                    money_to
+            );
+
+            return new MainPageModel(advice, weather, currency);
+        } catch (Exception e) {
+            return new MainPageModel(e.getMessage());
+        }
     }
 }

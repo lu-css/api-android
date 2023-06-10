@@ -1,4 +1,4 @@
-package com.example.request.models;
+package com.example.models;
 
 public class Localization{
   public double lat;

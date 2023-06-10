@@ -21,15 +21,7 @@ public class RequestUtils {
     public static JSONObject get(String url, String... params) throws IOException, Exception  {
         URL buildedUrl = buildURL(url, params);
 
-        HttpURLConnection urlConnection = (HttpURLConnection) buildedUrl.openConnection();
-
-        urlConnection.connect();
-
-        JSONObject response = buildresponse(urlConnection);
-
-        urlConnection.disconnect();
-
-        return response;
+        return get(buildedUrl);
     }
 
     public static JSONObject get(URL url) throws IOException, Exception  {
@@ -50,7 +42,7 @@ public class RequestUtils {
      *
      * @return the formated url as `URL`.
      */
-    public static URL buildURL(String url, String... params) throws MalformedURLException, InvalidQueryParams, InvalidQueryParams {
+    public static URL buildURL(String url, String... params) throws MalformedURLException {
         Uri uri = Uri.parse(url);
 
         return new URL(uri.toString());
