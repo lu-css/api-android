@@ -93,21 +93,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.moveToFirst();
 
         while(!cursor.isAfterLast()){
+            History history = new History(); 
             int index;
 
-            index = cursor.getColumnIndex(DB.COLUMN_HISTORY_ID);
-            int id = cursor.getInt(index);
+            // index = cursor.getColumnIndex(DB.COLUMN_HISTORY_ID);
 
             // MoneyFrom Field.
             index = cursor.getColumnIndex(DB.COLUMN_HISTORY_MONEY_FROM);
-            String money_from = cursor.getString(index);
+            history.moneyFrom = cursor.getString(index);
 
             // MoneyTo Field.
             index = cursor.getColumnIndex(DB.COLUMN_HISTORY_MONEY_TO);
-            String money_to = cursor.getString(index);
+            history.moneyTo = cursor.getString(index);
 
-            histories.add(new History(id, money_from, money_to));
+            histories.add(history);
+            cursor.moveToNext();
         }
+
+        cursor.close();
 
         return histories;
     }
