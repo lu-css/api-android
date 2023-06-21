@@ -14,7 +14,7 @@ Dupla: Rafaella Medeiros Trexler Mourão e Lucas dos Santos Silva
 
 # Descrição do App
 
-O nosso aplicativo de "Boas vindas informativo" foi desenvolvido para fornecer informações importantes para o dia a dia do usuário de maneira fácil e conveniente. Com apenas uma tela, o usuário pode ter acesso a diversas informações úteis.
+O nosso aplicativo "EveryDay" foi desenvolvido para fornecer informações importantes para o dia a dia do usuário de maneira fácil e conveniente. Com apenas uma tela, o usuário pode ter acesso a diversas informações úteis.
 
 Começamos exibindo as condições climáticas em tempo real, com base na localização do usuário. Isso é possível graças à API "Weather api" e à API "FreeIP api", que trabalham juntas para identificar a localização do usuário com base no endereço IP do dispositivo. Com esta informação, podemos fornecer dados precisos sobre a temperatura, previsão do tempo, umidade e outras informações relacionadas ao clima em sua região.
 
